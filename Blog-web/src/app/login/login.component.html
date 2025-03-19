@@ -1,0 +1,29 @@
+<div class="login-box">
+    <div class="">
+        <h3>Login</h3>
+    </div>
+    <div class="">
+        <form [formGroup]="loginfrom" (ngSubmit)="onlogin()">
+            <div class="mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Enter Your Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Enter The Password</mat-label>
+                    <input matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+            </div>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="d-flex justify-content-center g-1">
+        <p>Already Have Account ?</p>
+        <span routerLink="/register" style="text-decoration: none;" class="text-dark">Resgister</span>
+    </div>
+</div>

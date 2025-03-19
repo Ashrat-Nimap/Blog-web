@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "Username": "Ashrat",
+      "email": "Ashrat@gmail.com",
+      "password": "12345678",
+      "id": 1
+    },
+    {
+      "Username": "prerna",
+      "email": "prerna@gmail.com",
+      "password": "12345678",
+      "id": 2
+    },
+    {
+      "Username": "Aman",
+      "email": "aman@gmail.com",
+      "password": "12345678",
+      "id": 3
+    }
+  ],
+  "posts": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "post": "hello",
+      "id": 3
+    },
+    {
+      "post": "hello",
+      "id": 4
+    },
+    {
+      "post": "hello guys",
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "post": "nice to meet you",
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "post": "jjj",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "post": "hello guys",
+      "userId": 2,
+      "id": 8
+    },
+    {
+      "post": "hhhh",
+      "userId": 2,
+      "id": 9
+    }
+  ]
+}
