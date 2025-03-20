@@ -14,20 +14,16 @@ export class LoginComponent {
   constructor(private blogService : BlogServiceService,private router : Router) {}
 
   loginfrom = new FormGroup({
-    email : new FormControl(),
+    username : new FormControl(),
     password : new FormControl()
   })
 
 
   onlogin(){
-    if(this.loginfrom.invalid) return;
-    const {email,password} = this.loginfrom.value;
-    this.blogService.getUser(email,password).subscribe((res) =>{
-      if(res){
-        // this.router.navigate(['/blog',this.userId]);
-      }else{
-        alert('invalid')
-      }
+    this.blogService.userLogin(this.loginfrom.value).subscribe((res)=>{
+      this.router.navigate(['/blog']),
+      localStorage.setItem("token",res.token);
+      localStorage.setItem("username",this.loginfrom.get('username')?.value)
     })
   }
 

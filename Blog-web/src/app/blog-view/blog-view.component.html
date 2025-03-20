@@ -1,12 +1,16 @@
 <div class="Navbar">
-    <app-nav-component></app-nav-component>
+    <app-nav-component [username]="username"></app-nav-component>
 </div>
 <div class="container mt-2">
     <div class="d-flex justify-content-center post-area">
         <form [formGroup]="postform" (ngSubmit)="addpost()">
             <div class="blog-input">
+                <input class="form-control" placeholder="Write Your Blog" id="floatingTextarea2"
+                    style="height: 100px; width: 20rem;" formControlName="title">
+            </div>
+            <div class="blog-input">
                 <textarea class="form-control" placeholder="Write Your Blog" id="floatingTextarea2"
-                    style="height: 100px; width: 20rem;" formControlName="post"></textarea>
+                    style="height: 100px; width: 20rem;" formControlName="content"></textarea>
             </div>
             <div class="blog-btn">
                 <button class="btn btn-primary px-2" type="submit">Post</button>
@@ -14,18 +18,19 @@
         </form>
     </div>
     <div *ngFor="let user of postdatalist">
-        <div class="mt-2 blog-box card p-2" *ngFor="let posts of user.post">
+        <div class="mt-2 blog-box card p-2">
             <div class="user-profile d-flex flex-column">
-                <h4 class="">{{user.Username}}</h4>
-                <h6 class="text-secondary">Time</h6>
+                <h4 class="">{{user.username}}</h4>
+                <h6 class="text-secondary">{{user.createdAt}}</h6>
             </div>
             <hr>
             <div class="blog-area">
-                {{posts.post}}
+                {{user.title}}
+                {{user.content}}
             </div>
             <hr>
             <div class="button-group d-flex justify-content-around">
-                <span><mat-icon fontIcon="favorite" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></span>
+                <span (click)="addLike(user.id)"><mat-icon fontIcon="favorite" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>{{user.likes || ''}}</span>
                 <span><mat-icon fontIcon="comment" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></span>
                 <span><mat-icon fontIcon="share" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></span>
             </div>

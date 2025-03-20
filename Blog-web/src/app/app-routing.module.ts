@@ -14,7 +14,7 @@ const routes: Routes = [
     component : RegisterComponent
   },
   {
-    path : 'blog/:id',
+    path : 'blog',
     component : BlogViewComponent 
   },
   {

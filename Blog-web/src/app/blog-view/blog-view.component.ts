@@ -12,23 +12,37 @@ export class BlogViewComponent implements OnInit{
 
   userId! : number
   postdatalist : any
+  username: any;
   constructor(private blogService : BlogServiceService,private routes : ActivatedRoute){}
   postform = new FormGroup({
-    post : new FormControl()
+    title : new FormControl(),
+    content : new FormControl()
   })
 
   ngOnInit(): void {
-    this.userId = +this.routes.snapshot.params['id'];
-    this.blogService.getAllUser().subscribe((res)=>{
-      this.postdatalist = res;
-      console.log(this.postdatalist);
+    this.getAllBlogs();
+  }
+  
+  getAllBlogs(){
+    this.blogService.getBlogs().subscribe((res)=>{
+      this.postdatalist = res.blogs;
     })
   }
   
   addpost(){
-    this.blogService.addPost(this.userId,this.postform.value).subscribe((res)=>{
+    this.blogService.addBlogs(this.postform.value).subscribe((res)=>{
       if(res){
-        alert('Post added successful')
+        this.getAllBlogs();
+        this.postform.reset();
+        alert("post added successfully");
+      }
+    })
+  }
+
+  addLike(blogId : any){
+    this.blogService.likedBlog(blogId).subscribe((res)=>{
+      if(res){
+        this.getAllBlogs();
       }
     })
   }

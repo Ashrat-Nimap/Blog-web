@@ -13,13 +13,13 @@ export class RegisterComponent {
   constructor(private blogService : BlogServiceService,private router : Router){}
 
   resgisterfrom = new FormGroup({
-    Username : new FormControl(),
-    email : new FormControl(),
+    username : new FormControl(),
+    // email : new FormControl(),
     password : new FormControl(),
   })
 
   resgister(){
-    this.blogService.userregister(this.resgisterfrom.value).subscribe(() => {
+    this.blogService.userRegister(this.resgisterfrom.value).subscribe(() => {
       this.router.navigate(['/login']);
     })
   }

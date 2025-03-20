@@ -7,44 +7,41 @@ import { Observable,map } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogServiceService {
-  private url = "http://localhost:3000/users";
-  private postsurl = "http://localhost:3000/posts";
+  private url = "http://localhost:5000";
 
   constructor(private http : HttpClient,private router : Router) { }
-  userId! : number;
-  userregister(userdata : any) : Observable<any>{
-    return this.http.post(this.url,userdata);
+
+  userRegister(data:Partial<{
+    username:any,
+    password:any
+  }>) : Observable<any>{
+    return this.http.post(`${this.url}/api/auth/register`,data);
+  }
+  userLogin(data:Partial<{
+    username:any,
+    password:any
+  }>) : Observable<any>{
+    return this.http.post(`${this.url}/api/auth/login`,data);
   }
 
-  getUser(email:string,password:string) : Observable<any>{
-    return this.http.get<any[]>(this.url).pipe(map(users => {
-      const user = users.find((u : any) => u.email === email && u.password === password);
-      if(user){
-        localStorage.setItem('username',user.Username);
-        this.userId = user.id
-        this.router.navigate(['/blog', this.userId]);
-        return true;
-      }else{
-        return false;
-      }
-    }))
+  addBlogs(blogdata : any) : Observable<any>{
+    return this.http.post(`${this.url}/api/blogs`,blogdata);
   }
 
-  getAllUser():Observable<any>{
-    return this.http.get<any[]>(this.url).pipe(map(users =>{
-      this.http.get<any[]>(this.postsurl).subscribe(posts =>{
-        users.forEach(user =>{
-          user.post = posts.filter(post => post.userId === user.id);
-        });
-      })
-      return users
-    })
-  );
+  getBlogs() : Observable<any>{
+    return this.http.get(`${this.url}/api/blogs`);
   }
 
-  addPost(userId: any,postdata : any) : Observable<any>{
-    const postWithUser = { ...postdata, userId };
-    return this.http.post(this.postsurl, postWithUser);
+  getToken(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
+
+  likedBlog(blogId : any){
+    return this.http.post(`${this.url}/api/blogs/${blogId}/like`,{});
+  }
+  
 }
 

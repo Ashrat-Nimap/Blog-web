@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-nav-component',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './nav-component.component.scss'
 })
 export class NavComponentComponent implements OnInit{
-  username : any
+
+  @Input()  username : any
+  // constructor(private router : ActivatedRouteSnapshot){}
 
   ngOnInit(): void {
    this.username = localStorage.getItem('username');
