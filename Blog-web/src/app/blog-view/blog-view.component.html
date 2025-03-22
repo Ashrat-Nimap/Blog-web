@@ -2,38 +2,48 @@
     <app-nav-component [username]="username"></app-nav-component>
 </div>
 <div class="container mt-2">
-    <div class="d-flex justify-content-center post-area">
-        <form [formGroup]="postform" (ngSubmit)="addpost()">
+    <div>
+        <form [formGroup]="postform" (ngSubmit)="addpost()" class="post-area">
             <div class="blog-input">
-                <input class="form-control" placeholder="Write Your Blog" id="floatingTextarea2"
-                    style="height: 100px; width: 20rem;" formControlName="title">
+                <mat-form-field>
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="title">
+                </mat-form-field>
             </div>
             <div class="blog-input">
-                <textarea class="form-control" placeholder="Write Your Blog" id="floatingTextarea2"
-                    style="height: 100px; width: 20rem;" formControlName="content"></textarea>
+                <mat-form-field>
+                    <mat-label>Write Your Thoughts</mat-label>
+                    <textarea matInput formControlName="content"></textarea>
+                </mat-form-field>
             </div>
             <div class="blog-btn">
-                <button class="btn btn-primary px-2" type="submit">Post</button>
+                <button mat-raised-button class="btn btn-primary px-2" type="submit" color="primary">Publish</button>
             </div>
         </form>
     </div>
-    <div *ngFor="let user of postdatalist">
-        <div class="mt-2 blog-box card p-2">
-            <div class="user-profile d-flex flex-column">
-                <h4 class="">{{user.username}}</h4>
-                <h6 class="text-secondary">{{user.createdAt}}</h6>
-            </div>
-            <hr>
-            <div class="blog-area">
-                {{user.title}}
-                {{user.content}}
-            </div>
-            <hr>
-            <div class="button-group d-flex justify-content-around">
-                <span (click)="addLike(user.id)"><mat-icon fontIcon="favorite" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>{{user.likes || ''}}</span>
-                <span><mat-icon fontIcon="comment" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></span>
-                <span><mat-icon fontIcon="share" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon></span>
-            </div>
-        </div>
+    <div *ngFor="let user of postdatalist" class="d-flex justify-content-center">
+        <mat-card appearance="outlined" class="mb-3 w-75">
+            <mat-card-header class="border-bottom">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{user.username}}</mat-card-title>
+                <mat-card-subtitle>{{user.createdAt}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="">
+                <p class="text-center fw-bold">
+                    {{user.title}}
+                </p>
+                <p>
+                    {{user.content}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions class="d-flex justify-content-around border-top">
+                <span (click)="addLike(user.id)" class="d-flex"><mat-icon fontIcon="favorite" aria-hidden="false"
+                        aria-label="Example thumbs up SVG icon"></mat-icon>{{user.likes || ''}}</span>
+                <span><mat-icon fontIcon="comment" aria-hidden="false"
+                        aria-label="Example thumbs up SVG icon"></mat-icon></span>
+                <span><mat-icon fontIcon="share" aria-hidden="false"
+                        aria-label="Example thumbs up SVG icon"></mat-icon></span>
+            </mat-card-actions>
+        </mat-card>
     </div>
 </div>

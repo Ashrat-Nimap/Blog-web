@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authinterceptorInterceptor } from './service/authinterceptor.interceptor';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { authinterceptorInterceptor } from './service/authinterceptor.intercepto
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     provideClientHydration(),
